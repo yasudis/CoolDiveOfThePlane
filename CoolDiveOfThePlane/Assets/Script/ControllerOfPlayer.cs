@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ControllerOfPlayer : MonoBehaviour
@@ -16,7 +14,7 @@ public class ControllerOfPlayer : MonoBehaviour
     
     
         
-    public void JostikControllOfPlayer(float xAxis, float zAxis)
+    public void ControledJostikOfPlayer(float xAxis, float zAxis)
     {
 
         // Извлечь информацию из класса Input
@@ -25,7 +23,6 @@ public class ControllerOfPlayer : MonoBehaviour
 
         if (xAxis != 0)
         {
-            //playerFlyer.transform.Rotate(0, 0, dynamicJoystick.Horizontal * 5);
             player.transform.Translate(xAxis * 1, 0, 0);
             // Повернуть корабль, чтобы придать ощущение динамизма // с
             playerFlyer.transform.rotation = Quaternion.Euler(zAxis * pitchMult, 0, xAxis * _rollMult);
@@ -40,7 +37,7 @@ public class ControllerOfPlayer : MonoBehaviour
             angle = 0;
         }
     }
-    public void ControlPositionOfPlaer(float camWidth, float camHeight, float radius)
+    public void ControledPositionOfPlaer(float camWidth, float camHeight, float radius)
         
     { 
         Vector3 pos = player.transform.position;

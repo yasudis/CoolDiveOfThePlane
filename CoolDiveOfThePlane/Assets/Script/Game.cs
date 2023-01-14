@@ -1,25 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField]
-    private DynamicJoystick dynamicJoystick;
-
-    [SerializeField]
-    private float _timeToDoItForFlyPlane=10f;
+    [SerializeField] private DynamicJoystick dynamicJoystick;
+    [SerializeField] private float _timeToDoItForFlyPlane=10f;
 
     private float _xAxis;
     private float _zAxis;
  
-
     [Header("Set Dynamically")]
-    public float CamWidth;
-    public float CamHeight;
-    public float Radius = 1f;
+    [SerializeField] private  float CamWidth;
+    [SerializeField] private float CamHeight;
+    [SerializeField] private float Radius = 1f;
 
     public ControllerOfPlayer ControllerOfPlayer;
+    public FlyPlane FlyPlane;
 
 
     private void Awake()
@@ -27,16 +23,18 @@ public class Game : MonoBehaviour
         CamHeight = Camera.main.orthographicSize;
         CamWidth = CamHeight * Camera.main.aspect;
         ControllerOfPlayer = FindObjectOfType<ControllerOfPlayer>();
+        FlyPlane = FindObjectOfType<FlyPlane>();  
     }
     private void FixedUpdate()
     {
         _xAxis = dynamicJoystick.Horizontal;
         _zAxis = dynamicJoystick.Vertical;
-        ControllerOfPlayer.JostikControllOfPlayer(_xAxis, _zAxis);
+        ControllerOfPlayer.ControledJostikOfPlayer(_xAxis, _zAxis);
         if (_timeToDoItForFlyPlane <= 0)
         {
-            _timeToDoItForFlyPlane = 10f;
+            _timeToDoItForFlyPlane = 1f;
             Debug.Log("Time-work");
+            FlyPlane.DoItOfPlane();
         }
         else
         {
@@ -45,9 +43,9 @@ public class Game : MonoBehaviour
 
     }
 
-    void LateUpdate()
+   private void LateUpdate()
     {
-        ControllerOfPlayer.ControlPositionOfPlaer(CamWidth, CamHeight, Radius);
+        ControllerOfPlayer.ControledPositionOfPlaer(CamWidth, CamHeight, Radius);
     }
    
 }

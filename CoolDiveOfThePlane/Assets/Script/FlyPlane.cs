@@ -1,51 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class FlyPlane : MonoBehaviour
+public class FlyPlane :MonoBehaviour
 {
-    [SerializeField]
-    private float _massOfPlane;
+    [SerializeField] private float _massOfPlane;
+    [SerializeField] private float _totalWeightOfOil;
+    [SerializeField] private float _totalWeightOfRemote;
+    [SerializeField] private float _totalWorkFactor;
+    [SerializeField] private float _healthOfPlane;
+    [SerializeField] private float EngineWorkFactor;
+    public Slider OilOfPlaer;
 
-    [SerializeField]
-    private float _totalWeightOfOil;
-    
-    [SerializeField]
-    private float _totalWeightOfRemote;
-
-    [SerializeField]
-    private float _totalWorkFactor;
-
-    [SerializeField]
-    private float _healthOfPlane;
-
-    public float EngineWorkFactor;
-
-    public void MoveOfPlane()
+   private void MoveOfPlane()
     {
         EngineWorkFactor = (_totalWeightOfOil + _totalWeightOfRemote) / _massOfPlane;
     }
-    public void WeightOfOil(float weightOfOil)
+    private void ControledWeightOfOil(float weightOfOil)
     {
         _totalWeightOfOil = _totalWeightOfOil + weightOfOil;
+        MoveOfPlane();
     }
-    public void WeightOfRemote(float weightOfRemote)
+    private void ControledWeightOfRemote(float weightOfRemote)
     {
         _totalWeightOfRemote = _totalWeightOfRemote + weightOfRemote;
+        MoveOfPlane();
     }
-    public void MassOfPlane()
+    private void ManageredMassOfPlane()
     {
        // _massOfPlane = _totalWeightOfOil + _totalWeightOfRemote;
     }
 
-    public void OilManadger()
+    private void ManageredOil()
     {
         _totalWeightOfOil = _totalWeightOfOil-EngineWorkFactor* _totalWorkFactor;
+        OilOfPlaer.value = _totalWeightOfOil;
+
+        if (_totalWeightOfOil <= 0)
+        {
+            Debug.Log("Oil is over");
+        }
     }
-    
-    public void RemoteManadger()
+
+    private void RemoteManadger()
     {
-        
+
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        GameObject collideWith = collision.gameObject;
+        if (collideWith.tag != "BoxOfEvent")
+        {
+
+            ControledWeightOfOil(100);
+        }
+
+    }
+
+    public void DoItOfPlane()
+    {
+        ManageredOil();
     }
 
 }

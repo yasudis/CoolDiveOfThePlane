@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BoxOfEvent : MonoBehaviour
+public abstract class BoxOfEvent : MonoBehaviour
 {
     public FlyPlane FlyPlane;
 
-    //Random randomMass;
-
-    private void Start()
+    protected IOilGetIt _oilGEtIt;
+    protected IRemoteGetIt _remoteGetIt;
+   
+   public void SetOilGetIt(IOilGetIt oilGetIt)
     {
-  
-
+        _oilGEtIt = oilGetIt;
     }
-
-    class Oil
+    public void SetRemoteGetIt(IRemoteGetIt remoteGetIt)
     {
-        private int _mass;
-       
+        _remoteGetIt = remoteGetIt;
     }
-
+    protected void GetOilForPlaye()
+    {
+        _oilGEtIt.GetOilForPlayer();
+    }
+    protected void GetRemoteForPlayer()
+    {
+        _remoteGetIt.GetRemoteForPlayer();
+    }
 }

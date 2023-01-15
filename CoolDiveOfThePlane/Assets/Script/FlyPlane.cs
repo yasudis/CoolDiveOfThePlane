@@ -10,7 +10,6 @@ public class FlyPlane :MonoBehaviour
     [SerializeField] private float _healthOfPlane;
     [SerializeField] private float EngineWorkFactor;
     public Slider OilOfPlaer;
-
    private void MoveOfPlane()
     {
         EngineWorkFactor = (_totalWeightOfOil + _totalWeightOfRemote) / _massOfPlane;
@@ -29,7 +28,6 @@ public class FlyPlane :MonoBehaviour
     {
        // _massOfPlane = _totalWeightOfOil + _totalWeightOfRemote;
     }
-
     private void ManageredOil()
     {
         _totalWeightOfOil = _totalWeightOfOil-EngineWorkFactor* _totalWorkFactor;
@@ -40,7 +38,6 @@ public class FlyPlane :MonoBehaviour
             Debug.Log("Oil is over");
         }
     }
-
     private void RemoteManadger()
     {
 
@@ -50,12 +47,10 @@ public class FlyPlane :MonoBehaviour
         GameObject collideWith = collision.gameObject;
         if (collideWith.tag != "BoxOfEvent")
         {
-
             ControledWeightOfOil(100);
         }
 
     }
-
     public void DoItOfPlane()
     {
         ManageredOil();

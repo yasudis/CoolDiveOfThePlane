@@ -8,19 +8,13 @@ public class ControllerOfPlayer : MonoBehaviour
     private float angle;
     public GameObject player;
     public GameObject playerFlyer;
-
     public float _rollMult = -45;
     public float pitchMult = -30;
-    
-    
-        
+ 
     public void ControledJostikOfPlayer(float xAxis, float zAxis)
     {
-
-        // Извлечь информацию из класса Input
-        
+        // Извлечь информацию из класса Input      
         angle = angle + xAxis * 5;
-
         if (xAxis != 0)
         {
             player.transform.Translate(xAxis * 1, 0, 0);
@@ -31,7 +25,6 @@ public class ControllerOfPlayer : MonoBehaviour
         {
             playerFlyer.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
         if (Mathf.Abs(angle) > 360)
         {
             angle = 0;
@@ -58,6 +51,6 @@ public class ControllerOfPlayer : MonoBehaviour
         pos.z = -camHeight * radius;
         }
         transform.position = pos;
-        }
+    }
    
 }

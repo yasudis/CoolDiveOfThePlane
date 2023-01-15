@@ -16,8 +16,6 @@ public class Game : MonoBehaviour
 
     public ControllerOfPlayer ControllerOfPlayer;
     public FlyPlane FlyPlane;
-
-
     private void Awake()
     {
         CamHeight = Camera.main.orthographicSize;
@@ -40,9 +38,7 @@ public class Game : MonoBehaviour
         {
             _timeToDoItForFlyPlane -= Time.deltaTime;
         }
-
     }
-
    private void LateUpdate()
     {
         ControllerOfPlayer.ControledPositionOfPlaer(CamWidth, CamHeight, Radius);

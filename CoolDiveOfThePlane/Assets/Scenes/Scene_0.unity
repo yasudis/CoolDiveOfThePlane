@@ -1631,5 +1631,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BoxOfEvent
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -3887026920344099636, guid: 4b2850daeb958e443838d24d2f087c35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4b2850daeb958e443838d24d2f087c35, type: 3}

@@ -1,8 +1,11 @@
 
+
+using System.Collections.Generic;
+
 public interface IOilGetIt 
 {
-    public void GetOilForPlayer()
+    public Dictionary<string, float> GetOilForPlayer(Dictionary<string, float> dataOfOil)
     {
-
+        return dataOfOil;
     }
 }

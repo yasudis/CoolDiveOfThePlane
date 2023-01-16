@@ -5,12 +5,20 @@ using UnityEngine;
 
 public abstract class BoxOfEvent : MonoBehaviour
 {
-    public FlyPlane FlyPlane;
-
     protected IOilGetIt _oilGEtIt;
     protected IRemoteGetIt _remoteGetIt;
-   
-   public void SetOilGetIt(IOilGetIt oilGetIt)
+    private Dictionary<string, float> _dataOfBox;
+    private void Awake()
+    {
+        _dataOfBox = new Dictionary<string, float>
+        {
+            {"oil", 0},
+            {"remote", 0},
+            {"health", 0},
+            {"workFactor", 0}
+        };
+    }
+    public void SetOilGetIt(IOilGetIt oilGetIt)
     {
         _oilGEtIt = oilGetIt;
     }
@@ -18,12 +26,16 @@ public abstract class BoxOfEvent : MonoBehaviour
     {
         _remoteGetIt = remoteGetIt;
     }
-    protected void GetOilForPlaye()
+    protected void GetOilForPlayer()
     {
-        _oilGEtIt.GetOilForPlayer();
+        _oilGEtIt.GetOilForPlayer(_dataOfBox);
     }
     protected void GetRemoteForPlayer()
     {
         _remoteGetIt.GetRemoteForPlayer();
+    }
+    public Dictionary<string, float> GetDataBox()
+    {
+        return _dataOfBox;
     }
 }

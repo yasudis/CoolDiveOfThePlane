@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class OilGetIt : IOilGetIt
 {
-  public void GetOilForPlayer()
+    public Dictionary<string, float> GetOilForPlayer(Dictionary<string, float> dataOfOil)
     {
-        Debug.Log("Oil Work");
+        if (dataOfOil.ContainsKey("oil"))
+        {
+            dataOfOil["oil"] += Random.Range(1, 10);
+            Debug.Log($"Oil Work its { dataOfOil["oil"]}");
+        }
+        return dataOfOil;   
     }
 }
 

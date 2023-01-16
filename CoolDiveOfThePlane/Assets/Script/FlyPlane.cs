@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,27 @@ public class FlyPlane :MonoBehaviour
     [SerializeField] private float _totalWeightOfRemote;
     [SerializeField] private float _totalWorkFactor;
     [SerializeField] private float _healthOfPlane;
-    [SerializeField] private float EngineWorkFactor;
+    [SerializeField] private float _engineWorkFactor;
+    [SerializeField] private GameObject Player;
     public Slider OilOfPlaer;
-   private void MoveOfPlane()
+
+    private Dictionary<string, float> _dataOfPlayer;
+    
+
+    private void Awake()
     {
-        EngineWorkFactor = (_totalWeightOfOil + _totalWeightOfRemote) / _massOfPlane;
+        _dataOfPlayer = new Dictionary<string, float>
+        {
+            {"oil", _totalWeightOfOil},
+            {"remote", _totalWeightOfRemote},
+            {"health", _healthOfPlane},
+            {"workFactor", _totalWorkFactor}
+        };
+    }
+
+    private void MoveOfPlane()
+    {
+        _engineWorkFactor = (_totalWeightOfOil + _totalWeightOfRemote) / _massOfPlane;
     }
     private void ControledWeightOfOil(float weightOfOil)
     {
@@ -30,7 +47,7 @@ public class FlyPlane :MonoBehaviour
     }
     private void ManageredOil()
     {
-        _totalWeightOfOil = _totalWeightOfOil-EngineWorkFactor* _totalWorkFactor;
+        _totalWeightOfOil = _totalWeightOfOil-_engineWorkFactor* _totalWorkFactor;
         OilOfPlaer.value = _totalWeightOfOil;
 
         if (_totalWeightOfOil <= 0)
@@ -43,17 +60,29 @@ public class FlyPlane :MonoBehaviour
 
     }
     public void OnCollisionEnter(Collision collision)
-    {
+    {      
         GameObject collideWith = collision.gameObject;
-        if (collideWith.tag != "BoxOfEvent")
+        Debug.Log($"Colid{ collideWith.tag}");
+        if (collideWith.tag == "BoxOfEvent")
         {
-            ControledWeightOfOil(100);
+            BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
+            Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
+            PutDataOnFlyPlane(dataBox);
+            Debug.Log($"Player have oil is {_dataOfPlayer["oil"]}");
         }
-
+    }
+    private Dictionary<string, float> PutDataOnFlyPlane(Dictionary<string, float> dataBox)
+    {
+        foreach (var data in dataBox)
+        {
+            _dataOfPlayer[data.Key] += data.Value;
+        }
+        return _dataOfPlayer;
     }
     public void DoItOfPlane()
     {
         ManageredOil();
     }
+    
 
 }

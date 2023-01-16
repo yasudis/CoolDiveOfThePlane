@@ -52,5 +52,16 @@ public class ControllerOfPlayer : MonoBehaviour
         }
         transform.position = pos;
     }
-   
+    public void OnCollisionEnter(Collision collision)
+    {
+        GameObject collideWith = collision.gameObject;
+        Debug.Log($"Colid{ collideWith.tag}");
+       // if (collideWith.tag == "BoxOfEvent")
+      //  {
+      //      BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
+      //      Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
+      //      PutDataOnFlyPlane(dataBox);
+      //      Debug.Log($"Player have oil is {_dataOfPlayer["oil"]}");
+      //  }
+    }
 }

@@ -16,6 +16,8 @@ public class Game : MonoBehaviour
 
     public ControllerOfPlayer ControllerOfPlayer;
     public FlyPlane FlyPlane;
+
+    public GameObject OilBox;
     private void Awake()
     {
         CamHeight = Camera.main.orthographicSize;

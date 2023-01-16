@@ -9,8 +9,5 @@ public class OilBox : BoxOfEvent
         SetOilGetIt(new OilGetIt());
         GetOilForPlayer();
     }
-    private void FixedUpdate()
-    {
-        this.transform.Translate(0, 0, -0.1f);
-    }
+    
 }

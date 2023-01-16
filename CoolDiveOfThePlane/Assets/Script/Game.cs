@@ -15,15 +15,18 @@ public class Game : MonoBehaviour
     [SerializeField] private float Radius = 1f;
 
     public ControllerOfPlayer ControllerOfPlayer;
-    public FlyPlane FlyPlane;
+    private FlyPlane FlyPlane;
 
+    public GameObject[] BoxEvents;
     public GameObject OilBox;
+    public GameObject RemoteBox;
     private void Awake()
     {
         CamHeight = Camera.main.orthographicSize;
         CamWidth = CamHeight * Camera.main.aspect;
         ControllerOfPlayer = FindObjectOfType<ControllerOfPlayer>();
-        FlyPlane = FindObjectOfType<FlyPlane>();  
+        FlyPlane = FindObjectOfType<FlyPlane>();
+        Invoke("InstatiateBoxEvent", 5);
     }
     private void FixedUpdate()
     {
@@ -40,10 +43,21 @@ public class Game : MonoBehaviour
         {
             _timeToDoItForFlyPlane -= Time.deltaTime;
         }
+        
     }
-   private void LateUpdate()
+    private void LateUpdate()
     {
         ControllerOfPlayer.ControledPositionOfPlaer(CamWidth, CamHeight, Radius);
     }
-   
+    private void InstatiateBoxEvent()
+    {
+        float spawnAcisX = Random.Range(-CamWidth, CamWidth);
+        float spawnAcisZ = CamHeight + 2;
+        int numberOfNumberBoxEvents = Random.Range(0, BoxEvents.Length);
+        Vector3 spawnPos = new Vector3(spawnAcisX, -10, spawnAcisZ);
+        Instantiate(BoxEvents[numberOfNumberBoxEvents], spawnPos,Quaternion.identity);
+        Debug.Log("InstatiateBoxEvent-work");
+        Invoke("InstatiateBoxEvent", 1);
+    }
+
 }

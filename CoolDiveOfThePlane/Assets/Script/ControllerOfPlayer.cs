@@ -1,16 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ControllerOfPlayer : MonoBehaviour
 {
-    
-    // private float speedOfAngleTurel;
     public Rigidbody rb;
     private float angle;
     public GameObject player;
     public GameObject playerFlyer;
-    public float _rollMult = -45;
-    public float pitchMult = -30;
- 
+    private float _rollMult = -45;
+    private float pitchMult = -30;
+
+    private FlyPlane _flyPlane;
+
+    private void Start()
+    {
+        _flyPlane = FindObjectOfType<FlyPlane>();
+    }
     public void ControledJostikOfPlayer(float xAxis, float zAxis)
     {
         // Извлечь информацию из класса Input      
@@ -55,13 +60,12 @@ public class ControllerOfPlayer : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         GameObject collideWith = collision.gameObject;
-        Debug.Log($"Colid{ collideWith.tag}");
-       // if (collideWith.tag == "BoxOfEvent")
-      //  {
-      //      BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
-      //      Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
-      //      PutDataOnFlyPlane(dataBox);
-      //      Debug.Log($"Player have oil is {_dataOfPlayer["oil"]}");
-      //  }
+        if (collideWith.tag == "BoxOfEvent")
+        {
+           BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
+           Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
+           _flyPlane.PutDataOnFlyPlane(dataBox);
+           Destroy(collideWith);
+        }
     }
 }

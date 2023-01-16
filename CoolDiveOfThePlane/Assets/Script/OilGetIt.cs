@@ -9,7 +9,6 @@ public class OilGetIt : IOilGetIt
         if (dataOfOil.ContainsKey("oil"))
         {
             dataOfOil["oil"] += Random.Range(1, 10);
-            Debug.Log($"Oil Work its { dataOfOil["oil"]}");
         }
         return dataOfOil;   
     }

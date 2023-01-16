@@ -18,6 +18,14 @@ public abstract class BoxOfEvent : MonoBehaviour
             {"workFactor", 0}
         };
     }
+    private void FixedUpdate()
+    {
+        this.transform.Translate(0, 0, -0.1f);
+        if (this.transform.position.z<= -Camera.main.orthographicSize)
+        {
+            DestroyBoxEvent();
+        }
+    }
     public void SetOilGetIt(IOilGetIt oilGetIt)
     {
         _oilGEtIt = oilGetIt;
@@ -32,10 +40,14 @@ public abstract class BoxOfEvent : MonoBehaviour
     }
     protected void GetRemoteForPlayer()
     {
-        _remoteGetIt.GetRemoteForPlayer();
+        _remoteGetIt.GetRemoteForPlayer(_dataOfBox);
     }
     public Dictionary<string, float> GetDataBox()
     {
         return _dataOfBox;
+    }
+    private void DestroyBoxEvent()
+    {
+        Destroy(this.gameObject); 
     }
 }

@@ -18,9 +18,9 @@ public abstract class BoxOfEvent : MonoBehaviour
             {"workFactor", 0}
         };
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        this.transform.Translate(0, 0, -0.1f);
+        this.transform.Translate(0, 0, -10f*Time.deltaTime);
         if (this.transform.position.z<= -Camera.main.orthographicSize)
         {
             DestroyBoxEvent();
@@ -48,6 +48,7 @@ public abstract class BoxOfEvent : MonoBehaviour
     }
     private void DestroyBoxEvent()
     {
-        Destroy(this.gameObject); 
+        Destroy(this.gameObject);
     }
+   
 }

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class OilBox : BoxOfEvent
 {
-       void Start()
+    void Start()
     {
         SetOilGetIt(new OilGetIt());
         GetOilForPlayer();
     }
-    
 }

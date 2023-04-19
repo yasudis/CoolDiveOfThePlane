@@ -10,7 +10,7 @@ public class OilGetIt : IOilGetIt
         {
             dataOfOil["oil"] += Random.Range(1, 10);
         }
-        return dataOfOil;   
+        return dataOfOil;
     }
 }
 

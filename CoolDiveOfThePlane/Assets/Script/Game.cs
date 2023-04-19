@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     [SerializeField] private DynamicJoystick dynamicJoystick;
-    [SerializeField] private float _timeToDoItForFlyPlane=1f;
+    [SerializeField] private float _timeToDoItForFlyPlane = 1f;
 
     private float _xAxis;
     private float _zAxis;
- 
+
     [Header("Set Dynamically")]
-    [SerializeField] private  float CamWidth;
+    [SerializeField] private float CamWidth;
     [SerializeField] private float CamHeight;
     [SerializeField] private float Radius = 1f;
 
@@ -32,9 +32,6 @@ public class Game : MonoBehaviour
         CamWidth = CamHeight * Camera.main.aspect;
         ControllerOfPlayer = FindObjectOfType<ControllerOfPlayer>();
         FlyPlane = FindObjectOfType<FlyPlane>();
-        Invoke("InstatiateClouds", 1f);
-      //  Invoke("InstatiateBoxEvent", 1);
-
 
     }
     private void FixedUpdate()
@@ -47,8 +44,8 @@ public class Game : MonoBehaviour
             _timeToDoItForFlyPlane = 1f;
             Debug.Log("Time-work");
             FlyPlane.DoItOfPlane();
-            //InstatiateBoxEvent();
-            
+            InstatiateBoxEvent();
+            InstatiateClouds();
         }
         else
         {
@@ -66,23 +63,19 @@ public class Game : MonoBehaviour
         int numberOfNumberBoxEvents = Random.Range(0, BoxEvents.Length);
         Vector3 spawnPos = new Vector3(spawnAcisX, -10, spawnAcisZ);
         Instantiate(BoxEvents[numberOfNumberBoxEvents], spawnPos, Quaternion.identity);
-        Invoke("InstatiateBoxEvent", 1);
     }
     private void InstatiateClouds()
     {
-        float spawnAcisX = Random.Range(-CamWidth, CamWidth);
-        float spawnAcisZ = CamHeight*5;
-       // float spawnAcisY = Random.Range(-20, 40);
-        int numberOfNumberClouds = Random.Range(0, Clouds.Length);
-        Vector3 spawnPos = new Vector3(spawnAcisX, -30, spawnAcisZ);
-        Instantiate(Clouds[numberOfNumberClouds], spawnPos, Quaternion.identity);
-        Invoke("InstatiateClouds", 5f);
+        if (GameObject.FindGameObjectsWithTag("Cloud").Length < 15)
+        {
+            float spawnAcisX = Random.Range(-CamWidth, CamWidth);
+            float spawnAcisZ = CamHeight * 5;
+            // float spawnAcisY = Random.Range(-20, 40);
+            int numberOfNumberClouds = Random.Range(0, Clouds.Length);
+            Vector3 spawnPos = new Vector3(spawnAcisX, -30, spawnAcisZ);
+            Instantiate(Clouds[numberOfNumberClouds], spawnPos, Quaternion.identity);
+        }
     }
-
-    // public void OnApplicationPause(bool pauseStatus)
-    // {
-    //     isPaused = pauseStatus;
-    // }
     public void OnGUI()
     {
         if ((isPaused) || (_onEnablePauseButton))
@@ -95,7 +88,6 @@ public class Game : MonoBehaviour
             Time.timeScale = 1;
             menuPanel.SetActive(false);
         }
-
     }
     public void OnApplicationFocus(bool hasFocus)
     {
@@ -107,7 +99,6 @@ public class Game : MonoBehaviour
             _onEnablePauseButton = false;
         else
             _onEnablePauseButton = true;
-
     }
     public void StartedNewGame()
     {

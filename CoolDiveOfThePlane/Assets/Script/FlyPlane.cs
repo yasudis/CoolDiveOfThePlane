@@ -17,7 +17,6 @@ public class FlyPlane : MonoBehaviour
     public Slider HealthOfPlayer;
 
     private Dictionary<string, float> _dataOfPlayer;
-    
 
     private void Awake()
     {
@@ -30,7 +29,6 @@ public class FlyPlane : MonoBehaviour
             {"workFactor", _totalWorkFactor}
         };
     }
-
     private void MoveOfPlane()
     {
         _engineWorkFactor = (_dataOfPlayer["oil"] + _dataOfPlayer["workFactor"]) / _massOfPlane;
@@ -43,10 +41,10 @@ public class FlyPlane : MonoBehaviour
     }
     private void ManageredOfRemote()
     {
-        if (_dataOfPlayer["remote"]> (_healthOfPlane - _dataOfPlayer["health"]))
+        if (_dataOfPlayer["remote"] > (_healthOfPlane - _dataOfPlayer["health"]))
         {
             _dataOfPlayer["remote"] -= (_healthOfPlane - _dataOfPlayer["health"]);
-            _dataOfPlayer["health"] += (_healthOfPlane - _dataOfPlayer["health"]);            
+            _dataOfPlayer["health"] += (_healthOfPlane - _dataOfPlayer["health"]);
         }
         else
         {
@@ -62,7 +60,7 @@ public class FlyPlane : MonoBehaviour
         ShowStatusHealth();
     }
     private void ShowStatusdOil()
-    {     
+    {
         OilOfPlaer.value = _dataOfPlayer["oil"];
         if (_dataOfPlayer["oil"] <= 0)
         {
@@ -80,7 +78,7 @@ public class FlyPlane : MonoBehaviour
     public Dictionary<string, float> PutDataOnFlyPlane(Dictionary<string, float> dataBox)
     {
         if (EnableToPutDataOnFLyPlay())
-            {
+        {
             foreach (var data in dataBox)
             {
                 _dataOfPlayer[data.Key] += data.Value;
@@ -90,7 +88,7 @@ public class FlyPlane : MonoBehaviour
     }
     private bool EnableToPutDataOnFLyPlay()
     {
-        if (_dataOfPlayer["oil"]+_dataOfPlayer["remote"]< _massOfPlaneMax)
+        if (_dataOfPlayer["oil"] + _dataOfPlayer["remote"] < _massOfPlaneMax)
             return true;
         else return false;
     }

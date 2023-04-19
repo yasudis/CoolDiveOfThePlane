@@ -20,8 +20,8 @@ public abstract class BoxOfEvent : MonoBehaviour
     }
     private void Update()
     {
-        this.transform.Translate(0, 0, -10f*Time.deltaTime);
-        if (this.transform.position.z<= -Camera.main.orthographicSize)
+        this.transform.Translate(0, 0, -10f * Time.deltaTime);
+        if (this.transform.position.z <= -Camera.main.orthographicSize)
         {
             DestroyBoxEvent();
         }
@@ -50,5 +50,4 @@ public abstract class BoxOfEvent : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-   
 }

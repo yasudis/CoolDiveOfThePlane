@@ -36,8 +36,8 @@ public class ControllerOfPlayer : MonoBehaviour
         }
     }
     public void ControledPositionOfPlaer(float camWidth, float camHeight, float radius)
-        
-    { 
+
+    {
         Vector3 pos = player.transform.position;
         if (pos.x > camWidth - radius)
         {
@@ -45,15 +45,15 @@ public class ControllerOfPlayer : MonoBehaviour
         }
         if (pos.x < -camWidth + radius)
         {
-        pos.x = -camWidth + radius;
+            pos.x = -camWidth + radius;
         }
         if (pos.z > camHeight - radius)
         {
-        pos.z = camHeight - radius;
+            pos.z = camHeight - radius;
         }
         if (pos.z < -camHeight + radius)
         {
-        pos.z = -camHeight * radius;
+            pos.z = -camHeight * radius;
         }
         transform.position = pos;
     }
@@ -62,10 +62,10 @@ public class ControllerOfPlayer : MonoBehaviour
         GameObject collideWith = collision.gameObject;
         if (collideWith.tag == "BoxOfEvent")
         {
-           BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
-           Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
-           _flyPlane.PutDataOnFlyPlane(dataBox);
-           Destroy(collideWith);
+            BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
+            Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
+            _flyPlane.PutDataOnFlyPlane(dataBox);
+            Destroy(collideWith);
         }
     }
 }

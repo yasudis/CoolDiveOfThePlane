@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IRemoteGetIt
 {
-    public Dictionary<string, float> GetRemoteForPlayer(Dictionary<string, float> dataOfREmote)
+    public Dictionary<string, float> GetRemotePlayer(Dictionary<string, float> dataREmote)
     {
-        return dataOfREmote;
+        return dataREmote;
     }
 }

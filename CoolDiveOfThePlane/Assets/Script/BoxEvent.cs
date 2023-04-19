@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class BoxOfEvent : MonoBehaviour
+public abstract class BoxEvent : MonoBehaviour
 {
     protected IOilGetIt _oilGEtIt;
     protected IRemoteGetIt _remoteGetIt;
-    private Dictionary<string, float> _dataOfBox;
+    private Dictionary<string, float> _dataBox;
     private void Awake()
     {
-        _dataOfBox = new Dictionary<string, float>
+        _dataBox = new Dictionary<string, float>
         {
             {"oil", 0},
             {"remote", 0},
@@ -34,17 +34,17 @@ public abstract class BoxOfEvent : MonoBehaviour
     {
         _remoteGetIt = remoteGetIt;
     }
-    protected void GetOilForPlayer()
+    protected void GetOilPlayer()
     {
-        _oilGEtIt.GetOilForPlayer(_dataOfBox);
+        _oilGEtIt.GetOilPlayer(_dataBox);
     }
-    protected void GetRemoteForPlayer()
+    protected void GetRemotePlayer()
     {
-        _remoteGetIt.GetRemoteForPlayer(_dataOfBox);
+        _remoteGetIt.GetRemotePlayer(_dataBox);
     }
     public Dictionary<string, float> GetDataBox()
     {
-        return _dataOfBox;
+        return _dataBox;
     }
     private void DestroyBoxEvent()
     {

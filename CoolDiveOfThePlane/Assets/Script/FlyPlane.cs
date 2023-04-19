@@ -4,100 +4,99 @@ using UnityEngine.UI;
 
 public class FlyPlane : MonoBehaviour
 {
-    [SerializeField] private float _massOfPlane;
-    [SerializeField] private float _massOfPlaneMax;
-    [SerializeField] private float _totalWeightOfOil;
-    [SerializeField] private float _totalWeightOfRemote;
+    [SerializeField] private float _massPlane;
+    [SerializeField] private float _massPlaneMax;
+    [SerializeField] private float _totalWeightOil;
+    [SerializeField] private float _totalWeightRemote;
     [SerializeField] private float _totalWorkFactor;
-    [SerializeField] private float _healthOfPlane;
+    [SerializeField] private float _healthPlane;
     [SerializeField] private float _engineWorkFactor;
     [SerializeField] private GameObject Player;
-    public Slider OilOfPlaer;
-    public Slider RemoteOfPlayer;
-    public Slider HealthOfPlayer;
+    public Slider OilPlaer;
+    public Slider RemotePlayer;
+    public Slider HealthPlayer;
 
-    private Dictionary<string, float> _dataOfPlayer;
+    private Dictionary<string, float> _dataPlayer;
 
     private void Awake()
     {
-        _dataOfPlayer = null;
-        _dataOfPlayer = new Dictionary<string, float>
+        _dataPlayer = null;
+        _dataPlayer = new Dictionary<string, float>
         {
-            {"oil", _totalWeightOfOil},
-            {"remote", _totalWeightOfRemote},
-            {"health", _healthOfPlane},
+            {"oil", _totalWeightOil},
+            {"remote", _totalWeightRemote},
+            {"health", _healthPlane},
             {"workFactor", _totalWorkFactor}
         };
     }
-    private void MoveOfPlane()
+    private void MovePlane()
     {
-        _engineWorkFactor = (_dataOfPlayer["oil"] + _dataOfPlayer["workFactor"]) / _massOfPlane;
+        _engineWorkFactor = (_dataPlayer["oil"] + _dataPlayer["workFactor"]) / _massPlane;
     }
-    private void ManageredtOfOil()
+    private void ManageredtOil()
     {
-        _dataOfPlayer["oil"] = _dataOfPlayer["oil"] - _engineWorkFactor * _dataOfPlayer["workFactor"];
-        MoveOfPlane();
+        _dataPlayer["oil"] = _dataPlayer["oil"] - _engineWorkFactor * _dataPlayer["workFactor"];
+        MovePlane();
         ShowStatusdOil();
     }
-    private void ManageredOfRemote()
+    private void ManageredRemote()
     {
-        if (_dataOfPlayer["remote"] > (_healthOfPlane - _dataOfPlayer["health"]))
+        if (_dataPlayer["remote"] > (_healthPlane - _dataPlayer["health"]))
         {
-            _dataOfPlayer["remote"] -= (_healthOfPlane - _dataOfPlayer["health"]);
-            _dataOfPlayer["health"] += (_healthOfPlane - _dataOfPlayer["health"]);
+            _dataPlayer["remote"] -= (_healthPlane - _dataPlayer["health"]);
+            _dataPlayer["health"] += (_healthPlane - _dataPlayer["health"]);
         }
         else
         {
-            _dataOfPlayer["health"] += _dataOfPlayer["remote"];
-            _dataOfPlayer["remote"] -= _dataOfPlayer["remote"];
+            _dataPlayer["health"] += _dataPlayer["remote"];
+            _dataPlayer["remote"] -= _dataPlayer["remote"];
         }
-        MoveOfPlane();
+        MovePlane();
         ShowStatusRemote();
-    }
-    private void ManageredOfHealth()
+    }    private void ManageredHealth()
     {
-        _dataOfPlayer["health"] = _dataOfPlayer["health"] - (_engineWorkFactor * _dataOfPlayer["workFactor"]);
+        _dataPlayer["health"] = _dataPlayer["health"] - (_engineWorkFactor * _dataPlayer["workFactor"]);
         ShowStatusHealth();
     }
     private void ShowStatusdOil()
     {
-        OilOfPlaer.value = _dataOfPlayer["oil"];
-        if (_dataOfPlayer["oil"] <= 0)
+        OilPlaer.value = _dataPlayer["oil"];
+        if (_dataPlayer["oil"] <= 0)
         {
             Debug.Log("Oil is over");
         }
     }
     private void ShowStatusRemote()
     {
-        RemoteOfPlayer.value = _dataOfPlayer["remote"];
+        RemotePlayer.value = _dataPlayer["remote"];
     }
     private void ShowStatusHealth()
     {
-        HealthOfPlayer.value = _dataOfPlayer["health"];
+        HealthPlayer.value = _dataPlayer["health"];
     }
     public Dictionary<string, float> PutDataOnFlyPlane(Dictionary<string, float> dataBox)
     {
-        if (EnableToPutDataOnFLyPlay())
+        if (EnablePutDataFLyPlay())
         {
             foreach (var data in dataBox)
             {
-                _dataOfPlayer[data.Key] += data.Value;
+                _dataPlayer[data.Key] += data.Value;
             }
         }
-        return _dataOfPlayer;
+        return _dataPlayer;
     }
-    private bool EnableToPutDataOnFLyPlay()
+    private bool EnablePutDataFLyPlay()
     {
-        if (_dataOfPlayer["oil"] + _dataOfPlayer["remote"] < _massOfPlaneMax)
+        if (_dataPlayer["oil"] + _dataPlayer["remote"] < _massPlaneMax)
             return true;
         else return false;
     }
-    public void DoItOfPlane()
+    public void DoItPlane()
     {
-        ManageredtOfOil();
-        ManageredOfRemote();
-        ManageredOfHealth();
-        Debug.Log($" oil {_dataOfPlayer["oil"]}, remote {_dataOfPlayer["remote"]}, health {_dataOfPlayer["health"]}");
+        ManageredtOil();
+        ManageredRemote();
+        ManageredHealth();
+        Debug.Log($" oil {_dataPlayer["oil"]}, remote {_dataPlayer["remote"]}, health {_dataPlayer["health"]}");
     }
     public void StartedGame() => Awake();
 }

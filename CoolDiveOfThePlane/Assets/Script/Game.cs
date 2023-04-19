@@ -15,7 +15,7 @@ public class Game : MonoBehaviour
     [SerializeField] private float CamHeight;
     [SerializeField] private float Radius = 1f;
 
-    public ControllerOfPlayer ControllerOfPlayer;
+    public ControllerPlayer ControllerPlayer;
     private FlyPlane FlyPlane;
 
     public GameObject[] BoxEvents;
@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
     {
         CamHeight = Camera.main.orthographicSize;
         CamWidth = CamHeight * Camera.main.aspect;
-        ControllerOfPlayer = FindObjectOfType<ControllerOfPlayer>();
+        ControllerPlayer = FindObjectOfType<ControllerPlayer>();
         FlyPlane = FindObjectOfType<FlyPlane>();
 
     }
@@ -38,12 +38,12 @@ public class Game : MonoBehaviour
     {
         _xAxis = dynamicJoystick.Horizontal;
         _zAxis = dynamicJoystick.Vertical;
-        ControllerOfPlayer.ControledJostikOfPlayer(_xAxis, _zAxis);
+        ControllerPlayer.ControledJostikPlayer(_xAxis, _zAxis);
         if (_timeToDoItForFlyPlane <= 0)
         {
             _timeToDoItForFlyPlane = 1f;
             Debug.Log("Time-work");
-            FlyPlane.DoItOfPlane();
+            FlyPlane.DoItPlane();
             InstatiateBoxEvent();
             InstatiateClouds();
         }
@@ -54,15 +54,15 @@ public class Game : MonoBehaviour
     }
     private void LateUpdate()
     {
-        ControllerOfPlayer.ControledPositionOfPlaer(CamWidth, CamHeight, Radius);
+        ControllerPlayer.ControledPositionPlaer(CamWidth, CamHeight, Radius);
     }
     private void InstatiateBoxEvent()
     {
         float spawnAcisX = Random.Range(-CamWidth, CamWidth);
         float spawnAcisZ = CamHeight + 2;
-        int numberOfNumberBoxEvents = Random.Range(0, BoxEvents.Length);
+        int numberNumberBoxEvents = Random.Range(0, BoxEvents.Length);
         Vector3 spawnPos = new Vector3(spawnAcisX, -10, spawnAcisZ);
-        Instantiate(BoxEvents[numberOfNumberBoxEvents], spawnPos, Quaternion.identity);
+        Instantiate(BoxEvents[numberNumberBoxEvents], spawnPos, Quaternion.identity);
     }
     private void InstatiateClouds()
     {

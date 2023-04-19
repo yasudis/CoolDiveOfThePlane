@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class RemoteGetIt : IRemoteGetIt
 {
-    public Dictionary<string, float> GetRemoteForPlayer(Dictionary<string, float> dataOfRemote)
+    public Dictionary<string, float> GetRemotePlayer(Dictionary<string, float> dataRemote)
     {
-        if (dataOfRemote.ContainsKey("remote"))
+        if (dataRemote.ContainsKey("remote"))
         {
-            dataOfRemote["remote"] += Random.Range(1, 10);
+            dataRemote["remote"] += Random.Range(1, 10);
         }
-        return dataOfRemote;
+        return dataRemote;
     }
 }

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerOfPlayer : MonoBehaviour
+public class ControllerPlayer : MonoBehaviour
 {
     public Rigidbody rb;
     private float angle;
     public GameObject player;
     public GameObject playerFlyer;
     private float _rollMult = -45;
-    private float pitchMult = -30;
+    private float _pitchMult = -30;
 
     private FlyPlane _flyPlane;
 
@@ -16,7 +16,7 @@ public class ControllerOfPlayer : MonoBehaviour
     {
         _flyPlane = FindObjectOfType<FlyPlane>();
     }
-    public void ControledJostikOfPlayer(float xAxis, float zAxis)
+    public void ControledJostikPlayer(float xAxis, float zAxis)
     {
         // Извлечь информацию из класса Input      
         angle = angle + xAxis * 5;
@@ -24,7 +24,7 @@ public class ControllerOfPlayer : MonoBehaviour
         {
             player.transform.Translate(xAxis * 1, 0, 0);
             // Повернуть корабль, чтобы придать ощущение динамизма // с
-            playerFlyer.transform.rotation = Quaternion.Euler(zAxis * pitchMult, 0, xAxis * _rollMult);
+            playerFlyer.transform.rotation = Quaternion.Euler(zAxis * _pitchMult, 0, xAxis * _rollMult);
         }
         else
         {
@@ -35,7 +35,7 @@ public class ControllerOfPlayer : MonoBehaviour
             angle = 0;
         }
     }
-    public void ControledPositionOfPlaer(float camWidth, float camHeight, float radius)
+    public void ControledPositionPlaer(float camWidth, float camHeight, float radius)
 
     {
         Vector3 pos = player.transform.position;
@@ -62,8 +62,8 @@ public class ControllerOfPlayer : MonoBehaviour
         GameObject collideWith = collision.gameObject;
         if (collideWith.tag == "BoxOfEvent")
         {
-            BoxOfEvent boxOfEvent = collideWith.GetComponent<BoxOfEvent>();
-            Dictionary<string, float> dataBox = boxOfEvent.GetDataBox();
+            BoxEvent boxEvent = collideWith.GetComponent<BoxEvent>();
+            Dictionary<string, float> dataBox = boxEvent.GetDataBox();
             _flyPlane.PutDataOnFlyPlane(dataBox);
             Destroy(collideWith);
         }

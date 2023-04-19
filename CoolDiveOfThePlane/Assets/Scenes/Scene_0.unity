@@ -1670,7 +1670,7 @@ MonoBehaviour:
   CamWidth: 0
   CamHeight: 0
   Radius: 1
-  ControllerOfPlayer: {fileID: 0}
+  ControllerPlayer: {fileID: 0}
   BoxEvents:
   - {fileID: 5873048898463990731, guid: 4b2850daeb958e443838d24d2f087c35, type: 3}
   - {fileID: 7301596393842334404, guid: 3806f8fc80becc9409db6fd66d6043c7, type: 3}
@@ -1690,17 +1690,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8d654452ef54e459e2c18677005f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _massOfPlane: 100
-  _massOfPlaneMax: 110
-  _totalWeightOfOil: 100
-  _totalWeightOfRemote: 10
+  _massPlane: 0
+  _massPlaneMax: 0
+  _totalWeightOil: 0
+  _totalWeightRemote: 0
   _totalWorkFactor: 2
-  _healthOfPlane: 100
+  _healthPlane: 0
   _engineWorkFactor: 1
   Player: {fileID: 799259166}
-  OilOfPlaer: {fileID: 1554859654}
-  RemoteOfPlayer: {fileID: 453152277}
-  HealthOfPlayer: {fileID: 1851914794}
+  OilPlaer: {fileID: 1554859654}
+  RemotePlayer: {fileID: 453152277}
+  HealthPlayer: {fileID: 1851914794}
 --- !u!4 &846934440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3654436079568306312, guid: 6ec4b6a68c4521e4e89e9b5ae2eb4bc6,
